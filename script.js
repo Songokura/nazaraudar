@@ -7,7 +7,7 @@
   var ASSET_V = ((doc.currentScript && doc.currentScript.src.match(/[?&]v=([^&]+)/)) || [])[1] || '';
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
   var isMobile = function () { return window.innerWidth <= 760; };
-  var WA_NUM = '77020669009';
+  var WA_NUM = '77757066450'; /* полировка, шумоизоляция и PDR - свой номер в data-num */
 
   /* ---------- i18n ---------- */
   var I18N = { ru: {} };
@@ -39,7 +39,7 @@
     [].forEach.call(doc.querySelectorAll('a[data-wa]'), function (a) {
       var k = 'wa.' + a.getAttribute('data-wa');
       var msg = d[k] || I18N.ru[k] || '';
-      a.href = 'https://wa.me/' + WA_NUM + (msg ? '?text=' + encodeURIComponent(msg) : '');
+      a.href = 'https://wa.me/' + (a.getAttribute('data-num') || WA_NUM) + (msg ? '?text=' + encodeURIComponent(msg) : '');
     });
   }
 
@@ -384,7 +384,8 @@
       if (service) lines.push(t('fm.service', 'Услуга') + ': ' + service);
       var msg = form.message.value.trim();
       if (msg) lines.push(t('fm.msg', 'Машина') + ': ' + msg);
-      var url = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(lines.join('\n'));
+      var num = (sel.selectedIndex > 0 && sel.options[sel.selectedIndex].getAttribute('data-num')) || WA_NUM;
+      var url = 'https://wa.me/' + num + '?text=' + encodeURIComponent(lines.join('\n'));
       fireConv('form');
       window.open(url, '_blank', 'noopener');
       ok.hidden = false;

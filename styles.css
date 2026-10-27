@@ -206,6 +206,17 @@ body.menu-open .hdr{backdrop-filter:none}
 .ph-stub svg{width:min(62%,420px);height:auto;position:relative}
 .ph-stub p{position:relative;font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
 .ph.has-img .ph-stub{display:none}
+/* последовательность работ (сложные аварии) и сетка PDR */
+.ph-seq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1.35fr) minmax(0,1fr);gap:4px}
+.ph-seq figure{position:relative;margin:0;min-width:0;min-height:0;display:flex;flex-direction:column;background:var(--coal)}
+.ph-seq figure:first-child{grid-column:1/-1}
+.ph-seq img{position:relative;inset:auto;flex:1;min-height:0;width:100%;height:auto;object-fit:cover}
+.ph-seq figcaption{flex:0 0 auto;padding:10px 14px;font:600 12px/1.2 var(--ft);letter-spacing:.1em;text-transform:uppercase;color:#C9D4E3;display:flex;align-items:center;gap:10px}
+.ph-seq figure + figure figcaption::before{content:"";width:14px;height:1.5px;background:var(--blue-l);flex:0 0 auto}
+.ph-grid{display:grid;grid-template-columns:repeat(2,minmax(0,calc((100svh - var(--hdr) - 60px)/2)));gap:6px;align-content:center;justify-content:center;padding:calc(var(--hdr) + 16px) clamp(16px,3vw,48px) 32px}
+.ph-grid img{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:8px}
+.sv-cta{display:flex;flex-wrap:wrap;gap:10px}
+.sv-txt .sv-cta .btn{align-self:auto}
 .stub-layers .l{fill:none;stroke:var(--blue-l);stroke-width:1.4;vector-effect:non-scaling-stroke}
 .stub-layers .f{fill:rgba(116,172,243,.12);stroke:var(--blue-l);stroke-width:1.2;vector-effect:non-scaling-stroke}
 .stub-layers text{font:600 11px var(--ft);fill:#C9D4E3;letter-spacing:.08em}
@@ -382,7 +393,13 @@ body.menu-open .sticky{transform:translateY(130%)}
   .hero-cta .btn{width:100%}
   .marq{position:relative;background:var(--ink)}
   .plate-sv .sv-grid{grid-template-rows:min(40svh,400px) minmax(0,1fr);grid-template-columns:minmax(0,1fr)}
-  .sv.rtl .sv-media{order:0}
+  .sv.rtl .sv-media{order:-1}
+  #avariynye .sv-grid,#vmyatiny .sv-grid{grid-template-rows:auto minmax(0,1fr)}
+  #avariynye .sv-media{aspect-ratio:1/1.08}
+  #vmyatiny .sv-media{aspect-ratio:1}
+  .ph-grid{padding:0;gap:4px;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ph-grid img{border-radius:0}
+  .ph-seq figcaption{padding:7px 10px;font-size:10.5px}
   .sv-media{order:-1}
   .sv-txt{padding:20px var(--pad) calc(var(--sticky) + 28px);justify-content:flex-start;gap:11px}
   .sv-txt .h2{font-size:clamp(28px,8.2vw,40px)}
