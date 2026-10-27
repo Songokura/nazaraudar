@@ -315,8 +315,7 @@
         imB.src = btn.dataset.before; imB.alt = btn.dataset.altBefore;
         imA.src = btn.dataset.after; imA.alt = btn.dataset.altAfter;
         imB.width = imA.width = btn.dataset.w; imB.height = imA.height = btn.dataset.h;
-        cmp.style.setProperty('--ar', btn.dataset.w + '/' + btn.dataset.h);
-        cmp.style.setProperty('--arn', (btn.dataset.w / btn.dataset.h).toFixed(3));
+        imB.style.objectPosition = btn.dataset.pb || ''; imA.style.objectPosition = btn.dataset.pa || '';
         range.value = 50; setX();
       });
     });
