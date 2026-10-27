@@ -140,7 +140,7 @@
   /* ---------- якоря: своя прокрутка с учётом шапки ---------- */
   var hdr = doc.getElementById('hdr');
   function targetTop(el) {
-    var off = el.classList.contains('pw') ? 0 : hdr.offsetHeight + 12;
+    var off = el.classList.contains('pw') && window.innerWidth > 760 ? 0 : hdr.offsetHeight + (el.classList.contains('pw') ? 0 : 12);
     return el.getBoundingClientRect().top + window.pageYOffset - off;
   }
   function goTo(id, instant) {
