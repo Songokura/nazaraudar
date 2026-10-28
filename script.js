@@ -300,6 +300,17 @@
     rvs.forEach(function (el) { io.observe(el); });
   } else rvs.forEach(function (el) { el.classList.add('in'); });
 
+  /* ---------- видео в плите: грузим и крутим только в кадре ---------- */
+  [].forEach.call(doc.querySelectorAll('video[data-src]'), function (v) {
+    if (reduce || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) {
+        if (!v.src) v.src = v.getAttribute('data-src');
+        var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+      } else if (v.src) v.pause();
+    }, { threshold: 0.3 }).observe(v);
+  });
+
   /* ---------- до / после ---------- */
   var cmp = doc.getElementById('cmp');
   if (cmp) {
