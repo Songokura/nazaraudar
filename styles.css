@@ -184,7 +184,7 @@ body.menu-open .hdr{backdrop-filter:none}
 .sv-media{position:relative;min-width:0}
 .plate-sv .sv-media{display:flex;align-items:center;justify-content:center;padding:calc(var(--hdr) + 36px) clamp(28px,4vw,64px) 48px}
 .plate-sv .sv-media > .ph{position:relative;inset:auto;width:100%;height:100%;max-height:640px;border-radius:16px}
-.sv .sv-media > .ph.ph-seq,.sv .sv-media > .ph.ph-grid,.sv .sv-media > .ph.ph-trio{background:none;border-radius:0}
+.sv .sv-media > .ph.ph-seq,.sv .sv-media > .ph.ph-grid,.sv .sv-media > .ph.ph-trio,.sv .sv-media > .ph.ph-six{background:none;border-radius:0}
 .sv.rtl .sv-media{order:-1}
 .facts{display:flex;flex-direction:column;gap:9px}
 .facts li{display:flex;align-items:flex-start;gap:12px;color:#E2E8F0;font-size:15px;line-height:1.45}
@@ -219,6 +219,8 @@ body.menu-open .hdr{backdrop-filter:none}
 .ph-trio{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:12px;background:none}
 .ph-trio img{position:relative;inset:auto;width:100%;height:100%;min-height:0;object-fit:cover;border-radius:12px}
 .ph-trio img:first-child{grid-row:1/-1}
+.ph-six{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-content:center;background:none}
+.ph-six img{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:10px}
 .ph-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ph-grid{display:grid;grid-template-columns:repeat(2,minmax(0,min(250px,calc((100svh - var(--hdr) - 140px)/2))));gap:16px;align-content:center;justify-content:center;background:none}
 .ph-grid figure{position:relative;margin:0;min-width:0}
@@ -406,7 +408,9 @@ body.menu-open .sticky{transform:translateY(130%)}
   .plate-sv .sv-grid{grid-template-rows:min(40svh,400px) minmax(0,1fr);grid-template-columns:minmax(0,1fr)}
   .sv.rtl .sv-media{order:-1}
   #avariynye .sv-grid,#vmyatiny .sv-grid,#shumoizolyatsiya .sv-grid,#polirovka .sv-grid{grid-template-rows:auto minmax(0,1fr)}
-  #avariynye .sv-media,#shumoizolyatsiya .sv-media{aspect-ratio:1/1.08}
+  #avariynye .sv-media{aspect-ratio:1/1.08}
+  #shumoizolyatsiya .sv-media{aspect-ratio:auto}
+  #shumoizolyatsiya .sv-media > .ph{height:auto}
   #polirovka .sv-media{aspect-ratio:1/1}
   #vmyatiny .sv-media{aspect-ratio:auto}
   #vmyatiny .sv-media > .ph{height:auto}
@@ -414,7 +418,7 @@ body.menu-open .sticky{transform:translateY(130%)}
   .plate-sv .sv-media > .ph{max-height:none;border-radius:14px}
   .ph-grid{gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
   .ph-grid img{border-radius:10px}
-  .ph-seq,.ph-trio{gap:8px}
+  .ph-seq,.ph-trio,.ph-six{gap:8px}
   .ph-trio img{border-radius:10px}
   .ph-seq figure{border-radius:10px}
   .ph-seq figcaption{padding:7px 10px;font-size:10.5px}
