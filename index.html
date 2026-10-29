@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wdth,wght@70,800&family=Onest:wght@400;500;600;700&display=swap">
 <link rel="preload" as="image" href="assets/hero.webp?v=20261028" media="(min-width: 761px)">
 <link rel="preload" as="image" href="assets/hero-m.webp?v=20261028" media="(max-width: 760px)">
-<link rel="stylesheet" href="styles.css?v=20261028-2">
+<link rel="stylesheet" href="styles.css?v=20261029-1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -91,8 +91,8 @@
       <img src="assets/logo.svg" alt="NAZAR AUDAR" width="79" height="40">
     </a>
     <nav class="nav" aria-label="Разделы сайта">
-      <a href="#uslugi" data-i="nav.uslugi">Услуги и цены</a>
       <a href="#do-posle" data-i="nav.raboty">До и после</a>
+      <a href="#uslugi" data-i="nav.uslugi">Услуги и цены</a>
       <a href="#pochemu" data-i="nav.pochemu">Почему мы</a>
       <a href="#kontakty" data-i="nav.kontakty">Контакты</a>
     </nav>
@@ -107,8 +107,8 @@
   </div>
   <div class="menu" id="menu" hidden>
     <nav class="menu-nav" aria-label="Мобильное меню">
-      <a href="#uslugi" data-i="nav.uslugi">Услуги и цены</a>
       <a href="#do-posle" data-i="nav.raboty">До и после</a>
+      <a href="#uslugi" data-i="nav.uslugi">Услуги и цены</a>
       <a href="#pochemu" data-i="nav.pochemu">Почему мы</a>
       <a href="#kontakty" data-i="nav.kontakty">Контакты</a>
     </nav>
@@ -143,22 +143,58 @@
         </div>
       </div>
     </div>
-    <div class="marq" aria-hidden="true">
-      <div class="marq-track">
-        <span class="marq-copy">
-          <i data-i="m.1">Полная покраска</i><i data-i="m.2">Покраска под толщиномер</i><i data-i="m.3">Костоправ</i><i data-i="m.4">Стапель и авторобот</i><i data-i="m.5">Замена порогов и арок</i><i data-i="m.6">Лонжероны</i><i data-i="m.7">Полировка</i><i data-i="m.8">Шумоизоляция</i><i data-i="m.9">Вмятины без покраски</i>
-        </span>
-      </div>
-    </div>
   </section>
 </div>
+
+<!-- ДО / ПОСЛЕ -->
+<section class="sec sec-light" id="do-posle">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="kicker" data-i="r.kicker">До и после</p>
+      <h2 class="h2" data-i="r.title">Машины, которые привезли на эвакуаторе</h2>
+      <p class="lead" data-i="r.lead">Передвиньте линию: слева машина как приехала, справа как уехала из цеха.</p>
+    </div>
+    <div class="cmp-wrap rv">
+      <div class="cmp" id="cmp">
+        <div class="cmp-layer cmp-before">
+          <img src="assets/ba-w210-before.webp" style="object-position:50% 50%" alt="До ремонта: зелёный Mercedes E-класса после лобового удара, смяты капот, решётка, фара и бампер" width="960" height="720" loading="lazy" decoding="async">
+          <span class="cmp-tag" data-i="r.before">до</span>
+        </div>
+        <div class="cmp-layer cmp-after">
+          <img src="assets/ba-w210-after.webp" style="object-position:50% 50%" alt="После ремонта: тот же Mercedes в цехе Nazaraudar, перед восстановлен и окрашен" width="960" height="720" loading="lazy" decoding="async">
+          <span class="cmp-tag" data-i="r.after">после</span>
+        </div>
+        <div class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg width="22" height="22"><use href="#ic-cmp"/></svg></span></div>
+        <input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Сравнение до и после">
+      </div>
+      <div class="cmp-cases" role="group" aria-label="Выбор работы">
+        <button type="button" class="cmp-case is-active" aria-pressed="true" data-before="assets/ba-w210-before.webp" data-after="assets/ba-w210-after.webp" data-w="960" data-h="720" data-pb="50% 50%" data-pa="50% 50%"
+          data-alt-before="До ремонта: зелёный Mercedes E-класса после лобового удара, смяты капот, решётка, фара и бампер" data-alt-after="После ремонта: тот же Mercedes в цехе Nazaraudar, перед восстановлен и окрашен">
+          <b data-i="c4.t">Mercedes E-класс</b><span data-i="c4.d">Лобовой удар: капот, решётка, фара, бампер</span>
+        </button>
+        <button type="button" class="cmp-case" aria-pressed="false" data-before="assets/ba-prado-before.webp" data-after="assets/ba-prado-after.webp" data-w="739" data-h="890" data-pb="50% 55%" data-pa="50% 72%"
+          data-alt-before="До ремонта: белый Toyota Land Cruiser Prado после лобового удара, разбиты бампер, решётка и фара" data-alt-after="После ремонта: тот же Land Cruiser Prado в цехе, перед восстановлен и окрашен">
+          <b data-i="c2.t">Toyota Land Cruiser Prado</b><span data-i="c2.d">Лобовой удар: бампер, фара, крыло, капот</span>
+        </button>
+        <button type="button" class="cmp-case" aria-pressed="false" data-before="assets/ba-pdr-before.webp" data-after="assets/ba-pdr-after.webp" data-w="700" data-h="1400" data-pb="50% 42%" data-pa="50% 42%"
+          data-alt-before="До: крупная вмятина на синей двери, искажённые отражения лампы" data-alt-after="После удаления вмятины без покраски: ровная дверь, прямые отражения лампы">
+          <b data-i="c3.t">Дверь, PDR</b><span data-i="c3.d">Вмятина убрана без покраски, заводской слой цел</span>
+        </button>
+        <button type="button" class="cmp-case" aria-pressed="false" data-before="assets/ba-elantra-before.webp" data-after="assets/ba-elantra-after.webp" data-w="999" data-h="492" data-pb="40% 50%" data-pa="40% 50%"
+          data-alt-before="До ремонта: синий Hyundai Elantra после удара сзади, смяты крыло, бампер и крышка багажника" data-alt-after="После ремонта: тот же Hyundai Elantra с восстановленной и окрашенной задней частью">
+          <b data-i="c1.t">Hyundai Elantra</b><span data-i="c1.d">Удар сзади: крыло, бампер, багажник, покраска</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ПЛИТА: ПОЛНАЯ ПОКРАСКА -->
 <div class="pw sv" id="pokraska">
   <section class="plate plate-sv">
     <div class="sv-grid">
       <div class="sv-txt txt">
-        <p class="kicker" data-i="p1.kicker">Полная покраска</p>
+        <p class="svc-name" data-i="p1.kicker">Полная покраска</p>
         <h2 class="h2" data-i="p1.title">Кузов целиком, цвет в цвет</h2>
         <p class="p" data-i="p1.text">Разборка, подготовка, покраска в камере и сборка. Колер подбираем точно под ваш цвет, срок называем до начала работ.</p>
         <ul class="facts">
@@ -183,7 +219,7 @@
   <section class="plate plate-sv">
     <div class="sv-grid">
       <div class="sv-txt txt">
-        <p class="kicker" data-i="p2.kicker">Покраска под толщиномер</p>
+        <p class="svc-name" data-i="p2.kicker">Покраска под толщиномер</p>
         <h2 class="h2" data-i="p2.title">Слой как с завода</h2>
         <p class="p" data-i="p2.text">Красим деталь так, что толщиномер показывает заводские микроны по всей поверхности. Для продажи и для тех, кто бережёт машину.</p>
         <ul class="facts">
@@ -195,9 +231,12 @@
         <a class="btn btn-solid btn-wa" href="https://wa.me/77757066450" data-wa="tolshchinomer" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ic-wa"/></svg><span data-i="btn.price">Узнать цену</span></a>
       </div>
       <div class="sv-media">
-        <div class="ph ph-video" id="ph-tolsh">
-          <video data-src="assets/tolsh.mp4" poster="assets/tolsh-poster.webp" muted loop playsinline preload="none" aria-label="Мастер снимает старую краску с детали кузова до металла"></video>
-        </div>
+        <figure class="vid-fig">
+          <div class="ph ph-video" id="ph-tolsh">
+            <video data-src="assets/tolsh.mp4" poster="assets/tolsh-poster.webp?v=20261029" muted loop playsinline preload="none" aria-label="Мастер снимает старую краску с детали кузова до металла"></video>
+          </div>
+          <figcaption data-i="p2.cap">Старое покрытие снимаем до металла - и красим заново заводским слоем</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -208,7 +247,7 @@
   <section class="plate plate-sv">
     <div class="sv-grid">
       <div class="sv-txt txt">
-        <p class="kicker" data-i="p3.kicker">Сложные аварии</p>
+        <p class="svc-name" data-i="p3.kicker">Сложные аварии</p>
         <h2 class="h2" data-i="p3.title">Геометрия кузова в ноль</h2>
         <p class="p" data-i="p3.text">Стапель и авторобот: вытягиваем кузов по заводским контрольным точкам. Меняем лонжероны, морду, крышу, пороги и арки, помогаем найти запчасти.</p>
         <ul class="facts">
@@ -235,14 +274,9 @@
   <section class="plate plate-sv">
     <div class="sv-grid">
       <div class="sv-txt txt">
-        <p class="kicker" data-i="p4.kicker">Полировка</p>
+        <p class="svc-name" data-i="p4.kicker">Полировка</p>
         <h2 class="h2" data-i="p4.title">Блеск без царапин и голограмм</h2>
         <p class="p" data-i="p4.text">Трёхэтапная абразивная полировка: убираем царапины, паутинку и матовость, возвращаем глубину цвета.</p>
-        <ul class="facts">
-          <li data-i="p4.f1">3 этапа: абразив, финиш, защита</li>
-          <li data-i="p4.f2">глубокие царапины - без покраски</li>
-          <li data-i="p4.f3">предпродажная подготовка</li>
-        </ul>
         <p class="price"><span data-i="p4.price">от&nbsp;40&nbsp;000&nbsp;₸</span><small data-i="p4.pn">полировка кузова</small></p>
         <a class="btn btn-solid btn-wa" href="https://wa.me/77020669009" data-num="77020669009" data-wa="polirovka" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ic-wa"/></svg><span data-i="btn.price">Узнать цену</span></a>
       </div>
@@ -262,14 +296,9 @@
   <section class="plate plate-sv">
     <div class="sv-grid">
       <div class="sv-txt txt">
-        <p class="kicker" data-i="p5.kicker">Шумоизоляция</p>
+        <p class="svc-name" data-i="p5.kicker">Шумоизоляция</p>
         <h2 class="h2" data-i="p5.title">Тихий салон в любой машине</h2>
         <p class="p" data-i="p5.text">Двери, пол, арки, багажник и капот: вибро- и шумопоглощающие слои по всему кузову. Дорожный гул и дребезг уходят.</p>
-        <ul class="facts">
-          <li data-i="p5.f1">полный комплекс или только двери</li>
-          <li data-i="p5.f2">материалы в несколько слоёв</li>
-          <li data-i="p5.f3">сборка салона без скрипов</li>
-        </ul>
         <p class="price"><span data-i="p5.price">от&nbsp;250&nbsp;000&nbsp;₸</span><small data-i="p5.pn">полный комплекс</small></p>
         <a class="btn btn-solid btn-wa" href="https://wa.me/77020669009" data-num="77020669009" data-wa="shumka" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ic-wa"/></svg><span data-i="btn.price">Узнать цену</span></a>
       </div>
@@ -292,7 +321,7 @@
   <section class="plate plate-sv">
     <div class="sv-grid">
       <div class="sv-txt txt">
-        <p class="kicker" data-i="p6.kicker">Вмятины без покраски</p>
+        <p class="svc-name" data-i="p6.kicker">Вмятины без покраски</p>
         <h2 class="h2" data-i="p6.title">Вмятина уходит, краска родная</h2>
         <p class="p" data-i="p6.text">Технология PDR: выдавливаем вмятину изнутри, без шпаклёвки и покраски.</p>
         <ul class="facts">
@@ -319,7 +348,7 @@
 </div>
 
 <!-- УСЛУГИ И ЦЕНЫ -->
-<section class="sec sec-light" id="uslugi">
+<section class="sec sec-dark" id="uslugi">
   <svg class="bgseam" viewBox="0 0 900 600" aria-hidden="true"><polygon points="0,0 306,0 290,276 0,276"/><polygon points="306,0 612,0 596,276 290,276"/><polygon points="612,0 900,0 900,276 596,276"/><polygon points="0,276 290,276 270,600 0,600"/><polygon points="290,276 596,276 576,600 270,600"/><polygon points="596,276 900,276 900,600 576,600"/></svg>
   <div class="wrap">
     <div class="sec-head rv">
@@ -385,49 +414,6 @@
   </div>
 </section>
 
-<!-- ДО / ПОСЛЕ -->
-<section class="sec sec-dark" id="do-posle">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="kicker" data-i="r.kicker">До и после</p>
-      <h2 class="h2" data-i="r.title">Машины, которые привезли на эвакуаторе</h2>
-      <p class="lead" data-i="r.lead">Передвиньте линию: слева машина как приехала, справа как уехала из цеха.</p>
-    </div>
-    <div class="cmp-wrap rv">
-      <div class="cmp" id="cmp">
-        <div class="cmp-layer cmp-before">
-          <img src="assets/ba-elantra-before.webp" style="object-position:40% 50%" alt="До ремонта: синий Hyundai Elantra после удара сзади, смяты крыло, бампер и крышка багажника" width="999" height="492" loading="lazy" decoding="async">
-          <span class="cmp-tag" data-i="r.before">до</span>
-        </div>
-        <div class="cmp-layer cmp-after">
-          <img src="assets/ba-elantra-after.webp" style="object-position:40% 50%" alt="После ремонта: тот же Hyundai Elantra с восстановленной и окрашенной задней частью" width="999" height="492" loading="lazy" decoding="async">
-          <span class="cmp-tag" data-i="r.after">после</span>
-        </div>
-        <div class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg width="22" height="22"><use href="#ic-cmp"/></svg></span></div>
-        <input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Сравнение до и после">
-      </div>
-      <div class="cmp-cases" role="group" aria-label="Выбор работы">
-        <button type="button" class="cmp-case is-active" aria-pressed="true" data-before="assets/ba-elantra-before.webp" data-after="assets/ba-elantra-after.webp" data-w="999" data-h="492" data-pb="40% 50%" data-pa="40% 50%"
-          data-alt-before="До ремонта: синий Hyundai Elantra после удара сзади, смяты крыло, бампер и крышка багажника" data-alt-after="После ремонта: тот же Hyundai Elantra с восстановленной и окрашенной задней частью">
-          <b data-i="c1.t">Hyundai Elantra</b><span data-i="c1.d">Удар сзади: крыло, бампер, багажник, покраска</span>
-        </button>
-        <button type="button" class="cmp-case" aria-pressed="false" data-before="assets/ba-prado-before.webp" data-after="assets/ba-prado-after.webp" data-w="739" data-h="890" data-pb="50% 55%" data-pa="50% 72%"
-          data-alt-before="До ремонта: белый Toyota Land Cruiser Prado после лобового удара, разбиты бампер, решётка и фара" data-alt-after="После ремонта: тот же Land Cruiser Prado в цехе, перед восстановлен и окрашен">
-          <b data-i="c2.t">Toyota Land Cruiser Prado</b><span data-i="c2.d">Лобовой удар: бампер, фара, крыло, капот</span>
-        </button>
-        <button type="button" class="cmp-case" aria-pressed="false" data-before="assets/ba-pdr-before.webp" data-after="assets/ba-pdr-after.webp" data-w="700" data-h="1400" data-pb="50% 42%" data-pa="50% 42%"
-          data-alt-before="До: крупная вмятина на синей двери, искажённые отражения лампы" data-alt-after="После удаления вмятины без покраски: ровная дверь, прямые отражения лампы">
-          <b data-i="c3.t">Дверь, PDR</b><span data-i="c3.d">Вмятина убрана без покраски, заводской слой цел</span>
-        </button>
-        <button type="button" class="cmp-case" aria-pressed="false" data-before="assets/ba-w210-before.webp" data-after="assets/ba-w210-after.webp" data-w="960" data-h="720" data-pb="50% 50%" data-pa="50% 50%"
-          data-alt-before="До ремонта: зелёный Mercedes E-класса после лобового удара, смяты капот, решётка, фара и бампер" data-alt-after="После ремонта: тот же Mercedes в цехе Nazaraudar, перед восстановлен и окрашен">
-          <b data-i="c4.t">Mercedes E-класс</b><span data-i="c4.d">Лобовой удар: капот, решётка, фара, бампер</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ПОЧЕМУ МЫ -->
 <section class="sec sec-light" id="pochemu">
   <svg class="bgseam" viewBox="0 0 900 600" aria-hidden="true" style="right:auto;left:-20%;top:30%"><polygon points="0,0 306,0 290,276 0,276"/><polygon points="306,0 612,0 596,276 290,276"/><polygon points="612,0 900,0 900,276 596,276"/><polygon points="0,276 290,276 270,600 0,600"/><polygon points="290,276 596,276 576,600 270,600"/><polygon points="596,276 900,276 900,600 576,600"/></svg>
@@ -435,12 +421,11 @@
     <div class="why">
       <div class="why-ph rv">
         <div class="ph rvph" data-panels data-static>
-          <img src="assets/tseh.webp" alt="Цех Nazaraudar: баннер «Nazar Audar автомастерская» на стене, на переднем плане выправленная деталь" width="1000" height="1333" loading="lazy" decoding="async">
+          <img src="assets/vyveska.webp" alt="Вывеска Nazar Audar над въездом в цех: маляр с краскопультом" width="1600" height="1200" loading="lazy" decoding="async">
         </div>
       </div>
       <div>
         <div class="sec-head rv">
-          <p class="kicker" data-i="w.kicker">Почему мы</p>
           <h2 class="h2" data-i="w.title">Цех, который работает 12 лет</h2>
           <p class="lead" data-i="w.lead">Своя покрасочная камера, стапель и авторобот. Машину можно привезти ночью: примем по адресу в любое время.</p>
         </div>
@@ -461,7 +446,6 @@
 <section class="sec sec-dark" id="kak-rabotaem">
   <div class="wrap">
     <div class="sec-head rv">
-      <p class="kicker" data-i="h.kicker">Как работаем</p>
       <h2 class="h2" data-i="h.title">От фото до выдачи</h2>
     </div>
     <ol class="steps rv" aria-label="Этапы работы">
@@ -478,7 +462,6 @@
   <div class="wrap">
     <div class="rev-head rv">
       <div class="sec-head" style="margin-bottom:0">
-        <p class="kicker" data-i="o.kicker">Отзывы</p>
         <h2 class="h2" data-i="o.title">Что пишут на 2ГИС</h2>
       </div>
       <div class="rev-rating"><b>4.9</b><div><div class="stars" aria-hidden="true">★★★★★</div><span data-i="o.cnt">11 отзывов на 2ГИС</span></div></div>
@@ -565,6 +548,6 @@
   <a class="sticky-wa" href="https://wa.me/77757066450" data-wa="hero" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ic-wa"/></svg><span>WhatsApp</span></a>
 </nav>
 
-<script src="script.js?v=20261028-2" defer></script>
+<script src="script.js?v=20261029-1" defer></script>
 </body>
 </html>

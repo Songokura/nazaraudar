@@ -78,7 +78,7 @@
     try { localStorage.setItem('nz-lang', lang); } catch (e) {}
     waLinks(lang);
     fitText();
-    marquee();
+   
     ribbonBtns();
   }
   function setLang(lang) { loadLang(lang, function () { applyLang(lang); }); }
@@ -108,18 +108,6 @@
     });
   }
 
-  /* ---------- бегущая лента: шаг цикла ровно одна копия ---------- */
-  function marquee() {
-    [].forEach.call(doc.querySelectorAll('.marq'), function (m) {
-      var track = m.querySelector('.marq-track'), copy = track.querySelector('.marq-copy');
-      [].forEach.call(track.querySelectorAll('.marq-copy:not(:first-child)'), function (c) { c.remove(); });
-      var w = copy.getBoundingClientRect().width;
-      if (!w) return;
-      var need = Math.max(2, Math.ceil((window.innerWidth * 2) / w) + 1);
-      for (var i = 1; i < need; i++) track.appendChild(copy.cloneNode(true));
-      m.style.setProperty('--mw', w + 'px');
-    });
-  }
 
   /* ---------- меню ---------- */
   var burger = doc.querySelector('.burger'), menu = doc.getElementById('menu');
@@ -410,10 +398,10 @@
   window.addEventListener('resize', function () {
     if (window.innerWidth === lastW) { onScroll(); return; }
     lastW = window.innerWidth;
-    fitText(); marquee(); ribbonBtns(); onScroll();
+    fitText(); ribbonBtns(); onScroll();
   });
   function start() {
-    fitText(); marquee(); ribbonBtns();
+    fitText(); ribbonBtns();
     if (location.hash) {
       var id = decodeURIComponent(location.hash.slice(1));
       goTo(id, true);
@@ -423,5 +411,5 @@
     plates();
   }
   if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(start); else start();
-  window.addEventListener('load', function () { fitText(); marquee(); ribbonBtns(); onScroll(); });
+  window.addEventListener('load', function () { fitText(); ribbonBtns(); onScroll(); });
 })();
