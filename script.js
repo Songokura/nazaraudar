@@ -318,6 +318,25 @@
         range.value = 50; setX();
       });
     });
+    // один раз показать, что линию можно тянуть
+    var touched = false;
+    range.addEventListener('pointerdown', function () { touched = true; });
+    if (!reduce && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (en) {
+        if (!en[0].isIntersecting) return;
+        io.disconnect();
+        var keys = [50, 22, 78, 50], D = 1800, t0 = null;
+        var ease = function (x) { return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
+        (function step(t) {
+          if (touched) return;
+          if (t0 === null) t0 = t;
+          var p = clamp((t - t0) / D, 0, 1) * 3, i = Math.min(2, Math.floor(p));
+          range.value = keys[i] + (keys[i + 1] - keys[i]) * ease(p - i); setX();
+          if (p < 3) requestAnimationFrame(step);
+        })(performance.now());
+      }, { threshold: .6 });
+      setTimeout(function () { io.observe(cmp); }, 400);
+    }
   }
 
   /* ---------- лента отзывов: стрелки, шаг одна карточка ---------- */
@@ -396,6 +415,7 @@
   /* ---------- старт ---------- */
   var lastW = window.innerWidth;
   window.addEventListener('resize', function () {
+    if (window.innerWidth >= 1024 && body.classList.contains('menu-open')) openMenu(false);
     if (window.innerWidth === lastW) { onScroll(); return; }
     lastW = window.innerWidth;
     fitText(); ribbonBtns(); onScroll();
