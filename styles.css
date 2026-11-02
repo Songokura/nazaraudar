@@ -567,3 +567,28 @@ body.menu-open .sticky{transform:translateY(130%)}
   .hero-pr li{padding:5px 0}
   .hero-ph{height:50%}
 }
+
+/* 02.11.2026: одна сетка на всю страницу и центровка голов секций */
+.hdr-in{max-width:1240px}
+#do-posle .sec-head,#uslugi .sec-head,#kak-rabotaem .sec-head,#otzyvy .sec-head{align-items:center;text-align:center}
+#do-posle .sec-head .lead,#uslugi .sec-head .lead{max-width:none}
+.rev-head{flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#otzyvy .rev-more{justify-content:center}
+#otzyvy .wrap > .btn,#otzyvy .wrap > p:last-child{align-self:center}
+#otzyvy .wrap{display:flex;flex-direction:column}
+#otzyvy .ribbon{align-self:stretch}
+.svc-note{justify-content:center}
+@media (min-width:761px){
+  .plate-sv .sv-grid{max-width:1240px;margin:0 auto;padding:0 var(--pad);column-gap:clamp(40px,5vw,80px)}
+  .pw.sv .sv-grid > .sv-txt,.pw.sv .sv-grid > .sv-media{padding-left:0;padding-right:0}
+}
+@media (max-width:760px){
+  .why .sec-head{align-items:center;text-align:center}
+  .nums{text-align:center}
+  .nums-line{text-align:center}
+  .k-btns .btn{flex:1 1 100%;justify-content:center}
+  .foot-in{flex-direction:column;align-items:center;text-align:center;gap:12px}
+  .foot-in .copy{margin-left:0}
+  .kinfo > .kicker{justify-content:center}
+  .kinfo > .h2,.kinfo > .k-tel{text-align:center}
+}
