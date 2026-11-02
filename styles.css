@@ -523,3 +523,36 @@ body.menu-open .sticky{transform:translateY(130%)}
   .hero-ph picture{transform:none}
   .btn,.svc-row::before,.arr{transition:none}
 }
+
+/* 02.11.2026: герой - цены покраски строкой, яркий кикер; BMW - четвёртый кадр «готово» */
+.hero-txt .kicker{color:#FFC94D;font-size:13px}
+.hero-txt .kicker::before{background:#FFC94D}
+.plate-hero .hero-scrim{background:linear-gradient(90deg,rgba(10,14,21,.8) 0%,rgba(10,14,21,.55) 34%,rgba(10,14,21,0) 62%),linear-gradient(180deg,rgba(10,14,21,.55) 0%,rgba(10,14,21,.05) 30%,rgba(10,14,21,.2) 55%,rgba(10,14,21,.9) 100%)}
+.hero-pr{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px 40px}
+.hero-pr li{display:flex;flex-direction:column;gap:4px}
+.hero-pr span{font:500 14px/1.2 var(--ft);color:#C9D4E3}
+.hero-pr b{font:700 clamp(20px,1.7vw,26px)/1.1 var(--ft);color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+#avariynye .ph-seq{grid-template-rows:minmax(0,1.1fr) minmax(0,.85fr) minmax(0,1.1fr)}
+#avariynye .ph-seq figure:nth-child(4){grid-column:1/-1}
+#avariynye .ph-seq figure:nth-child(4) img{object-position:50% 72%}
+#avariynye .ph-seq figure:nth-child(4) figcaption{color:#fff}
+@media (max-width:760px){
+  .hero-in{padding-top:calc(var(--hdr) + 22px);padding-bottom:28px;justify-content:flex-start}
+  .hero-txt{flex:1}
+  .hero-cta{margin-top:auto;padding-top:18px}
+  .hero-ph{top:auto;height:62%;background:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24%);mask-image:linear-gradient(180deg,transparent 0,#000 24%)}
+  .hero-ph img{object-position:50% 72%}
+  .hero-txt .kicker{font-size:12px;letter-spacing:.1em;white-space:nowrap}
+  .plate-hero .hero-scrim{background:linear-gradient(180deg,rgba(10,14,21,0) 55%,rgba(10,14,21,.55) 80%,rgba(10,14,21,.9) 100%)}
+  .hero-pr{flex-direction:column;gap:0;margin-top:2px}
+  .hero-pr li{flex-direction:row;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .hero-pr li:last-child{border-bottom:0}
+  .hero-pr span{font-size:15px}
+  .hero-pr b{font-size:17px}
+  #avariynye .sv-media{aspect-ratio:1/1.5}
+}
+@media (max-height:700px) and (max-width:760px){
+  .hero-in{padding-top:calc(var(--hdr) + 14px);padding-bottom:20px}
+  .hero-pr li{padding:5px 0}
+  .hero-ph{height:50%}
+}
