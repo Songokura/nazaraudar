@@ -9,4 +9,4 @@ Allow: /
 Disallow: /assets/lang/
 Disallow: /*lang=kk
 
-Sitemap: https://songokura.github.io/nazaraudar/sitemap.xml
+Sitemap: https://nazaraudar.kz/sitemap.xml
