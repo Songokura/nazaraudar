@@ -30,9 +30,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wdth,wght@70,800&family=Onest:wght@400;500;600;700&display=swap">
-<link rel="preload" as="image" href="assets/hero.webp?v=20261028" media="(min-width: 761px)">
-<link rel="preload" as="image" href="assets/hero-m.webp?v=20261028" media="(max-width: 760px)">
-<link rel="stylesheet" href="styles.css?v=20261106-2">
+<link rel="preload" as="image" href="assets/hero-car.webp?v=20261106">
+<link rel="stylesheet" href="styles.css?v=20261106-3">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,11 +125,100 @@
 <!-- ГЕРОЙ -->
 <div class="pw hero" id="top">
   <section class="plate plate-hero" aria-label="Покраска авто и ремонт после ДТП в Алматы">
-    <div class="ph hero-ph" data-panels data-cp="12.4,-7.8,4.1">
-      <picture>
-        <source media="(max-width:760px)" srcset="assets/hero-m.webp?v=20261028">
-        <img src="assets/hero.webp?v=20261028" alt="Чёрный Mercedes GL после покраски и полировки: ровный глянец и чёткие отражения ламп на капоте" width="1600" height="900" fetchpriority="high" decoding="async">
-      </picture>
+    <div class="booth" id="booth" aria-hidden="true">
+      <svg class="booth-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <radialGradient id="bt-bg" cx="65%" cy="52%" r="70%"><stop offset="0" stop-color="#1F2C40"/><stop offset=".55" stop-color="#111926"/><stop offset="1" stop-color="#070A10"/></radialGradient>
+          <linearGradient id="bt-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1520" stop-opacity="0"/><stop offset="1" stop-color="#05070B"/></linearGradient>
+        </defs>
+        <rect width="1600" height="900" fill="url(#bt-bg)"/>
+        <g class="floor">
+        <line x1="914" y1="528" x2="-1300" y2="1200"/>
+        <line x1="928" y1="528" x2="-1040" y2="1200"/>
+        <line x1="942" y1="528" x2="-780" y2="1200"/>
+        <line x1="956" y1="528" x2="-520" y2="1200"/>
+        <line x1="970" y1="528" x2="-260" y2="1200"/>
+        <line x1="984" y1="528" x2="0" y2="1200"/>
+        <line x1="998" y1="528" x2="260" y2="1200"/>
+        <line x1="1012" y1="528" x2="520" y2="1200"/>
+        <line x1="1026" y1="528" x2="780" y2="1200"/>
+        <line x1="1040" y1="528" x2="1040" y2="1200"/>
+        <line x1="1054" y1="528" x2="1300" y2="1200"/>
+        <line x1="1068" y1="528" x2="1560" y2="1200"/>
+        <line x1="1082" y1="528" x2="1820" y2="1200"/>
+        <line x1="1096" y1="528" x2="2080" y2="1200"/>
+        <line x1="1110" y1="528" x2="2340" y2="1200"/>
+        <line x1="1124" y1="528" x2="2600" y2="1200"/>
+        <line x1="1138" y1="528" x2="2860" y2="1200"/>
+        <line x1="1152" y1="528" x2="3120" y2="1200"/>
+        <line x1="1166" y1="528" x2="3380" y2="1200"/>
+        <line x1="-200" y1="528" x2="1800" y2="528"/>
+        <line x1="-200" y1="536" x2="1800" y2="536"/>
+        <line x1="-200" y1="546" x2="1800" y2="546"/>
+        <line x1="-200" y1="560" x2="1800" y2="560"/>
+        <line x1="-200" y1="578" x2="1800" y2="578"/>
+        <line x1="-200" y1="602" x2="1800" y2="602"/>
+        <line x1="-200" y1="634" x2="1800" y2="634"/>
+        <line x1="-200" y1="676" x2="1800" y2="676"/>
+        <line x1="-200" y1="731" x2="1800" y2="731"/>
+        <line x1="-200" y1="804" x2="1800" y2="804"/>
+        <line x1="-200" y1="900" x2="1800" y2="900"/>
+        </g>
+        <rect y="528" width="1600" height="900" fill="url(#bt-floor)"/>
+        <g class="tunnel">
+        <polyline class="led-glow" style="--i:0" points="-138,1148 -138,201 309,-308 1770,-308 2218,201 2218,1148"/>
+        <polyline class="led-glow" style="--i:1" points="188,946 188,262 512,-106 1567,-106 1891,262 1891,946"/>
+        <polyline class="led-glow" style="--i:2" points="416,805 416,304 653,34 1426,34 1663,304 1663,805"/>
+        <polyline class="led-glow" style="--i:3" points="584,702 584,335 757,138 1322,138 1496,335 1496,702"/>
+        <polyline class="led-glow" style="--i:4" points="705,626 705,357 832,213 1247,213 1374,357 1374,626"/>
+        <polyline class="led-glow" style="--i:5" points="796,570 796,374 889,269 1190,269 1283,374 1283,570"/>
+        <polyline class="led-glow" style="--i:6" points="865,528 865,387 931,311 1148,311 1214,387 1214,528"/>
+        <polyline class="led" style="--i:0" points="-138,1148 -138,201 309,-308 1770,-308 2218,201 2218,1148"/>
+        <polyline class="led" style="--i:1" points="188,946 188,262 512,-106 1567,-106 1891,262 1891,946"/>
+        <polyline class="led" style="--i:2" points="416,805 416,304 653,34 1426,34 1663,304 1663,805"/>
+        <polyline class="led" style="--i:3" points="584,702 584,335 757,138 1322,138 1496,335 1496,702"/>
+        <polyline class="led" style="--i:4" points="705,626 705,357 832,213 1247,213 1374,357 1374,626"/>
+        <polyline class="led" style="--i:5" points="796,570 796,374 889,269 1190,269 1283,374 1283,570"/>
+        <polyline class="led" style="--i:6" points="865,528 865,387 931,311 1148,311 1214,387 1214,528"/>
+        <line class="rail" x1="-138" y1="201" x2="865" y2="387"/>
+        <line class="rail" x1="309" y1="-308" x2="931" y2="311"/>
+        <line class="rail" x1="1770" y1="-308" x2="1148" y2="311"/>
+        <line class="rail" x1="2218" y1="201" x2="1214" y2="387"/>
+        </g>
+      </svg>
+    </div>
+    <div class="car" id="car">
+      <div class="car-shadow" aria-hidden="true"></div>
+      <img class="car-refl" src="assets/hero-car.webp?v=20261106" alt="" aria-hidden="true" width="1130" height="965" decoding="async">
+      <div class="car-body">
+        <img class="car-primer" src="assets/hero-car.webp?v=20261106" alt="" aria-hidden="true" width="1130" height="965" decoding="async">
+        <img class="car-paint" src="assets/hero-car.webp?v=20261106" alt="Красный Changan в цехе Nazaraudar: свежий лак с глубоким глянцем" width="1130" height="965" fetchpriority="high" decoding="async">
+        <div class="car-sheen" aria-hidden="true"></div>
+        <canvas class="spray" id="spray" aria-hidden="true"></canvas>
+        <span class="gauge" style="left:24%;top:47%" data-v="112" aria-hidden="true"><b>-</b> мкм</span>
+        <span class="gauge" style="left:47%;top:36%" data-v="118" aria-hidden="true"><b>-</b> мкм</span>
+        <span class="gauge" style="left:68%;top:50%" data-v="121" aria-hidden="true"><b>-</b> мкм</span>
+        <svg class="gun" id="gun" viewBox="0 0 220 160" aria-hidden="true">
+          <defs>
+            <linearGradient id="gn-m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F7FB"/><stop offset=".45" stop-color="#AEB8C6"/><stop offset="1" stop-color="#5C6778"/></linearGradient>
+            <linearGradient id="gn-c" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C9D2DE"/><stop offset=".5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#8E99A8"/></linearGradient>
+          </defs>
+          <g transform="rotate(-30 0 60)">
+            <path d="M138 70 L160 70 L178 150 Q179 158 170 158 L156 158 Q149 158 148 151 Z" fill="#1B2432" stroke="#3A4659" stroke-width="2"/>
+            <rect x="160" y="150" width="20" height="10" rx="3" fill="#8E99A8"/>
+            <path d="M92 76 Q86 100 104 118" fill="none" stroke="#C9D2DE" stroke-width="5" stroke-linecap="round"/>
+            <rect x="14" y="48" width="150" height="26" rx="12" fill="url(#gn-m)" stroke="#4B5668" stroke-width="1.5"/>
+            <rect x="150" y="54" width="34" height="14" rx="5" fill="#2A3445"/>
+            <circle cx="12" cy="60" r="12" fill="url(#gn-c)" stroke="#4B5668" stroke-width="1.5"/>
+            <path d="M4 48 L-6 40 M4 72 L-6 80" stroke="#AEB8C6" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="0" cy="60" r="3.2" fill="#1F6FD6"/>
+            <path d="M70 48 L74 30 L106 30 L110 48 Z" fill="#AEB8C6" stroke="#4B5668" stroke-width="1.5"/>
+            <path d="M64 30 Q64 2 90 2 Q116 2 116 30 Z" fill="url(#gn-c)" stroke="#4B5668" stroke-width="1.5" opacity=".95"/>
+            <path d="M72 26 Q74 10 90 8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+            <rect x="122" y="40" width="10" height="10" rx="2" fill="#5C6778"/>
+          </g>
+        </svg>
+      </div>
     </div>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="wrap hero-in">
@@ -557,6 +645,6 @@
   <button class="lb-arr lb-next" type="button" aria-label="Следующее фото"><svg width="22" height="22"><use href="#ic-arr"/></svg></button>
 </div>
 
-<script src="script.js?v=20261106-2" defer></script>
+<script src="script.js?v=20261106-3" defer></script>
 </body>
 </html>

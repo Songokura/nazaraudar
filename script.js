@@ -78,7 +78,7 @@
     try { localStorage.setItem('nz-lang', lang); } catch (e) {}
     waLinks(lang);
     fitText();
-   
+    placeCar();
     ribbonBtns();
     if (typeof nowStatus === 'function') nowStatus();
   }
@@ -247,27 +247,119 @@
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(plates); } }
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ---------- интро героя: панели кузова встают в зазоры, точки уходят в ноль ---------- */
+  /* ---------- интро героя: свет в камере, проход краскопульта, замер толщиномером, блик ---------- */
   var introDone = false;
+  var booth = doc.getElementById('booth'), car = doc.getElementById('car');
   function runIntro() {
     var heroTxt = hero.querySelector('.hero-txt');
-    var skip = reduce || location.hash || window.pageYOffset > 80 || !heroPh;
-    if (skip) {
-      if (heroPh) setG(heroPh, 0);
-      introDone = true; heroTxt.classList.add('on'); onScroll(); return;
+    if (!car || !booth) { introDone = true; heroTxt.classList.add('on'); onScroll(); return; }
+    var paint = car.querySelector('.car-paint'), sheen = car.querySelector('.car-sheen');
+    var gun = doc.getElementById('gun'), cv = doc.getElementById('spray');
+    var gauges = [].slice.call(car.querySelectorAll('.gauge')).map(function (g) {
+      return { el: g, x: parseFloat(g.style.left) / 100, v: +g.getAttribute('data-v'), t0: null, done: false };
+    });
+    function finalState() {
+      booth.classList.add('lit');
+      paint.style.setProperty('--p', 1);
+      gauges.forEach(function (g) { g.el.firstChild.textContent = g.v; g.el.classList.add('on', 'ok'); });
+      sheen.classList.add('on'); sheen.style.setProperty('--sx', '120%');
+      introDone = true; heroTxt.classList.add('on'); onScroll();
     }
-    var t0 = null, HOLD = 320, D = 1150;
-    setG(heroPh, 1);
-    setTimeout(function () { heroTxt.classList.add('on'); }, 520);
+    var skip = reduce || location.hash || window.pageYOffset > 80;
+    if (skip) { finalState(); return; }
+
+    paint.style.setProperty('--p', 0);
+    var ctx = cv.getContext && cv.getContext('2d'), parts = [], dpr = Math.min(2, window.devicePixelRatio || 1), cw = 0, chh = 0;
+    function sizeCv() { var r = cv.getBoundingClientRect(); cw = r.width; chh = r.height; cv.width = cw * dpr; cv.height = chh * dpr; }
+    sizeCv();
+    requestAnimationFrame(function () { booth.classList.add('lit'); });
+    setTimeout(function () { introDone = true; heroTxt.classList.add('on'); onScroll(); }, 450);
+
+    /* линия поверхности кузова по x (доли кадра машины): капот ниже, крыша выше */
+    var surf = function (x) { return x < .42 ? .40 - x * .05 : x < .62 ? .38 - (x - .42) * .6 : .26; };
+    var T_PASS = 1000, D_PASS = 2100, T_END = T_PASS + D_PASS, t0 = null;
+    var ease = function (x) { return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
     function frame(t) {
       if (t0 === null) t0 = t;
-      var k = clamp((t - t0 - HOLD) / D, 0, 1);
-      setG(heroPh, 1 - easeOutBack(k));
-      if (k < 1) requestAnimationFrame(frame);
-      else { setG(heroPh, 0); introDone = true; onScroll(); }
+      var el = t - t0, k = clamp((el - T_PASS) / D_PASS, 0, 1), p = ease(k);
+      var cr = car.getBoundingClientRect(), cvr = cv.getBoundingClientRect();
+      /* краска и краскопульт */
+      paint.style.setProperty('--p', p);
+      var gx = (p * 1.06 - .02) * cr.width, gy = (surf(clamp(p, 0, 1)) - .17 + Math.sin(el / 160) * .012) * cr.height;
+      var gunIn = clamp((el - T_PASS + 350) / 350, 0, 1), gunOut = clamp((el - T_END) / 450, 0, 1);
+      gun.style.opacity = gunIn * (1 - gunOut);
+      var gh = gun.getBoundingClientRect().height || 100;
+      gun.style.transform = 'translate(' + gx + 'px,' + (gy - gh * .375 - gunOut * 60) + 'px)';
+      /* туман краски из сопла вниз-влево */
+      if (ctx) {
+        var nx = cr.left - cvr.left + gx, ny = cr.top - cvr.top + gy;
+        if (k > 0 && k < 1) for (var i = 0; i < 9; i++) {
+          var ang = 2.35 + (Math.random() - .5) * .55, sp = 2.2 + Math.random() * 3.2;
+          parts.push({ x: nx, y: ny, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, l: 1, r: .8 + Math.random() * 2.4, red: Math.random() < .78 });
+        }
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, cw, chh);
+        for (var j = parts.length - 1; j >= 0; j--) {
+          var q = parts[j];
+          q.x += q.vx; q.y += q.vy; q.vx *= .965; q.vy = q.vy * .965 + .03; q.l -= .028; q.r += .07;
+          if (q.l <= 0) { parts.splice(j, 1); continue; }
+          ctx.fillStyle = q.red ? 'rgba(214,28,44,' + (q.l * .5) + ')' : 'rgba(255,235,238,' + (q.l * .35) + ')';
+          ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, 6.283); ctx.fill();
+        }
+      }
+      /* толщиномер: точка загорается, когда краска её прошла */
+      gauges.forEach(function (g, i) {
+        if (!g.el.classList.contains('on') && el > T_PASS - 200 + i * 120) g.el.classList.add('on');
+        if (g.t0 === null && p * 1.12 - .06 > g.x) g.t0 = el;
+        if (g.t0 !== null && !g.done) {
+          var c = clamp((el - g.t0) / 700, 0, 1);
+          g.el.firstChild.textContent = Math.round(g.v * (1 - Math.pow(1 - c, 3)));
+          if (c >= 1) { g.done = true; g.el.classList.add('ok'); }
+        }
+      });
+      /* блик по свежему лаку */
+      if (el > T_END + 200) {
+        sheen.classList.add('on');
+        sheen.style.setProperty('--sx', (-40 + clamp((el - T_END - 200) / 1300, 0, 1) * 160) + '%');
+      }
+      if (el < T_END + 1600 || parts.length) requestAnimationFrame(frame);
+      else { if (ctx) ctx.clearRect(0, 0, cw, chh); gauges.forEach(function (g) { g.el.firstChild.textContent = g.v; g.el.classList.add('ok'); }); glossFollow(); }
     }
     requestAnimationFrame(frame);
   }
+
+  /* мобильный герой: машина в свободном месте между ценами и кнопками */
+  function placeCar() {
+    if (!car) return;
+    if (!isMobile()) { hero.style.removeProperty('--car-top'); return; }
+    var pr = hero.querySelector('.hero-pr'), cta = hero.querySelector('.hero-cta'), pl = hero.querySelector('.plate-hero');
+    if (!pr || !cta) return;
+    var base = pl.getBoundingClientRect().top;
+    var top = pr.getBoundingClientRect().bottom - base, bot = cta.getBoundingClientRect().top - base;
+    var h = car.getBoundingClientRect().height;
+    /* верх кадра машины почти пустой: можно заходить под цены на 14% высоты */
+    var y = Math.max(top - h * .14, bot - h * .9);
+    hero.style.setProperty('--car-top', Math.round(y) + 'px');
+  }
+
+  /* блик и параллакс за курсором (только мышь) */
+  var glossOn = false;
+  function glossFollow() {
+    if (glossOn || reduce || !window.matchMedia('(hover:hover) and (pointer:fine)').matches || !car) return;
+    glossOn = true;
+    var sheen = car.querySelector('.car-sheen'), pend = false, mx = 0, my = 0;
+    hero.addEventListener('pointermove', function (e) {
+      mx = e.clientX / window.innerWidth - .5; my = e.clientY / window.innerHeight - .5;
+      if (pend) return; pend = true;
+      requestAnimationFrame(function () {
+        pend = false;
+        hero.style.setProperty('--mx', mx.toFixed(3)); hero.style.setProperty('--my', my.toFixed(3));
+        var r = car.getBoundingClientRect();
+        sheen.style.setProperty('--sx', (((window.innerWidth * (mx + .5)) - r.left) / r.width * 100 - 14).toFixed(1) + '%');
+      });
+    });
+  }
+  if (reduce) {} else window.addEventListener('load', function () { setTimeout(glossFollow, 4500); });
 
   /* ---------- липкая панель ---------- */
   var sticky = doc.getElementById('sticky'), kont = doc.getElementById('kontakty');
@@ -557,10 +649,10 @@
     if (window.innerWidth >= 1024 && body.classList.contains('menu-open')) openMenu(false);
     if (window.innerWidth === lastW) { onScroll(); return; }
     lastW = window.innerWidth;
-    fitText(); ribbonBtns(); onScroll();
+    fitText(); ribbonBtns(); placeCar(); onScroll();
   });
   function start() {
-    fitText(); ribbonBtns();
+    fitText(); ribbonBtns(); placeCar();
     if (location.hash) {
       var id = decodeURIComponent(location.hash.slice(1));
       goTo(id, true);
