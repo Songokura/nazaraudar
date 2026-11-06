@@ -652,3 +652,23 @@ body.lb-open{overflow:hidden}
   .lb,.lb-img,.totop{transition:none}
   .k-now i{animation:none}
 }
+
+/* ---------- продающий герой 06.11.2026: оффер, звонок, ответ менеджера ---------- */
+.hero-offer{display:flex;flex-wrap:wrap;gap:8px 22px;font:500 clamp(15px,1.15vw,17px)/1.3 var(--ft);color:#E8EEF6}
+.hero-offer span{display:inline-flex;align-items:center;gap:9px}
+.hero-offer span::before{content:"";width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:rgba(37,211,102,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.3l2.2 2.2 4.8-5' fill='none' stroke='%2325D366' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.hero-num{font-weight:500;opacity:.78;margin-left:2px}
+.hero-man{display:flex;align-items:center;gap:12px;font:500 14px/1.35 var(--ft);color:#C9D4E3}
+.hero-av{position:relative;width:34px;height:34px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font:700 14px/1 var(--ft)}
+.hero-av i{position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;background:var(--wa);border:2px solid var(--ink)}
+.hero-txt.on > :nth-child(5){transition-delay:.4s}
+.hero-txt.on > :nth-child(6){transition-delay:.5s}
+.hero-cta .btn-solid{box-shadow:0 10px 30px -10px rgba(31,111,214,.75)}
+@media (max-width:1100px){.hero-num{display:none}}
+@media (max-width:760px){
+  .hero-offer{gap:5px 14px;font-size:13.5px}
+  .hero-offer span{gap:6px}
+  .hero-offer span::before{width:14px;height:14px;background-size:14px}
+  .hero-man{font-size:13px;gap:10px}
+  .hero-man .hero-av{width:30px;height:30px;font-size:13px}
+}
