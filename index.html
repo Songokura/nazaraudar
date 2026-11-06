@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wdth,wght@70,800&family=Onest:wght@400;500;600;700&display=swap">
 <link rel="preload" as="image" href="assets/hero.webp?v=20261028" media="(min-width: 761px)">
 <link rel="preload" as="image" href="assets/hero-m.webp?v=20261028" media="(max-width: 760px)">
-<link rel="stylesheet" href="styles.css?v=20261102-6">
+<link rel="stylesheet" href="styles.css?v=20261106-1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -105,6 +105,7 @@
       <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
+  <div class="hdr-prog" aria-hidden="true"><i id="prog"></i></div>
   <div class="menu" id="menu" hidden>
     <nav class="menu-nav" aria-label="Мобильное меню">
       <a href="#do-posle" data-i="nav.raboty">До и после</a>
@@ -492,6 +493,7 @@
         </div>
         <div class="k-row"><span class="kl" data-i="k.l1">Адрес цеха</span><span class="kv" data-i="k.v1">Карасайский район, с. Абай, ул. Алатау, 62а/3<small>остановка «Дастархан», рядом с Алматы</small></span></div>
         <div class="k-row"><span class="kl" data-i="k.l2">График</span><span class="kv" data-i="k.v2">9:00-22:00 без выходных<small>машину принимаем по адресу круглосуточно</small></span></div>
+        <p class="k-now" id="k-now" hidden><i></i><span></span></p>
         <div class="man">
           <div class="av" aria-hidden="true">Н</div>
           <p data-i="k.man"><b>Назар, менеджер</b>отвечает на заявки в течение 5-10 минут</p>
@@ -543,6 +545,16 @@
   <a class="sticky-wa" href="https://wa.me/77757066450" data-wa="hero" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ic-wa"/></svg><span>WhatsApp</span></a>
 </nav>
 
-<script src="script.js?v=20261102-6" defer></script>
+<button class="totop" id="totop" type="button" aria-label="Наверх"><svg width="20" height="20" style="transform:rotate(-90deg)"><use href="#ic-arr"/></svg></button>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <figure class="lb-fig"><img class="lb-img" alt=""><figcaption class="lb-cap"></figcaption></figure>
+  <span class="lb-cnt" aria-live="polite"></span>
+  <button class="lb-x" type="button" aria-label="Закрыть"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <button class="lb-arr lb-prev" type="button" aria-label="Предыдущее фото"><svg width="22" height="22"><use href="#ic-l"/></svg></button>
+  <button class="lb-arr lb-next" type="button" aria-label="Следующее фото"><svg width="22" height="22"><use href="#ic-arr"/></svg></button>
+</div>
+
+<script src="script.js?v=20261106-1" defer></script>
 </body>
 </html>

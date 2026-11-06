@@ -80,6 +80,7 @@
     fitText();
    
     ribbonBtns();
+    if (typeof nowStatus === 'function') nowStatus();
   }
   function setLang(lang) { loadLang(lang, function () { applyLang(lang); }); }
 
@@ -241,6 +242,7 @@
       }
     });
     stickyBar();
+    uiScroll();
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(plates); } }
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -271,7 +273,7 @@
   var sticky = doc.getElementById('sticky'), kont = doc.getElementById('kontakty');
   var kontVisible = false;
   if ('IntersectionObserver' in window && kont) {
-    new IntersectionObserver(function (es) { kontVisible = es[0].isIntersecting; stickyBar(); }, { threshold: 0.15 }).observe(kont);
+    new IntersectionObserver(function (es) { kontVisible = es[0].isIntersecting; stickyBar(); if (typeof uiScroll === 'function') uiScroll(); }, { threshold: 0.15 }).observe(kont);
   }
   function stickyBar() {
     if (!sticky) return;
@@ -410,6 +412,143 @@
     });
     form.phone.addEventListener('input', function () { form.phone.closest('.fld').classList.remove('is-bad'); });
     form.name.addEventListener('input', function () { form.name.closest('.fld').classList.remove('is-bad'); });
+  }
+
+  /* ---------- UI: прогресс чтения, текущий раздел в меню, кнопка «наверх» ---------- */
+  var prog = doc.getElementById('prog'), totop = doc.getElementById('totop');
+  var spyLinks = [].slice.call(doc.querySelectorAll('.nav a[href^="#"], .menu-nav a[href^="#"]'));
+  var spyIds = [], spyCur = null, progLast = -1;
+  spyLinks.forEach(function (a) { var id = a.getAttribute('href').slice(1); if (spyIds.indexOf(id) < 0 && doc.getElementById(id)) spyIds.push(id); });
+  function uiScroll() {
+    var y = window.pageYOffset, max = root.scrollHeight - H;
+    var k = max > 0 ? Math.round(clamp(y / max, 0, 1) * 1000) / 1000 : 0;
+    if (prog && k !== progLast) { progLast = k; hdr.style.setProperty('--prog', k); }
+    var probe = hdr.offsetHeight + H * 0.3, cur = null;
+    spyIds.forEach(function (id) {
+      var r = doc.getElementById(id).getBoundingClientRect();
+      if (r.top <= probe && r.bottom > probe) cur = id;
+    });
+    if (cur !== spyCur) {
+      spyCur = cur;
+      spyLinks.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + cur;
+        a.classList.toggle('is-cur', on);
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    }
+    if (totop) totop.classList.toggle('is-on', y > H * 1.5 && !kontVisible);
+  }
+  if (totop) totop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    history.pushState(null, '', location.pathname + location.search);
+  });
+
+  /* ---------- UI: сейчас открыто / закрыто (время Алматы, UTC+5) ---------- */
+  var kNow = doc.getElementById('k-now');
+  var NOW_RU = { 'ui.open': 'Сейчас открыто · до 22:00', 'ui.closed': 'Откроемся в 9:00 · машину примем круглосуточно' };
+  Object.keys(NOW_RU).forEach(function (k) { I18N.ru[k] = NOW_RU[k]; });
+  function nowStatus() {
+    if (!kNow) return;
+    var d = new Date(), h = (d.getUTCHours() + 5) % 24;
+    var open = h >= 9 && h < 22, key = open ? 'ui.open' : 'ui.closed';
+    var dict = I18N[root.lang] || I18N.ru;
+    kNow.lastChild.textContent = dict[key] || I18N.ru[key];
+    kNow.classList.toggle('is-off', !open);
+    kNow.hidden = false;
+  }
+  nowStatus();
+  setInterval(nowStatus, 60000);
+
+  /* ---------- UI: фото работ на весь экран ---------- */
+  var lb = doc.getElementById('lb');
+  if (lb) {
+    var lbImg = lb.querySelector('.lb-img'), lbCap = lb.querySelector('.lb-cap'), lbCnt = lb.querySelector('.lb-cnt');
+    var lbPrev = lb.querySelector('.lb-prev'), lbNext = lb.querySelector('.lb-next'), lbX = lb.querySelector('.lb-x');
+    var lbSet = [], lbI = 0, lbBack = null;
+    var groups = [].slice.call(doc.querySelectorAll('.ph-seq, .ph-grid, .ph-trio, .ph-six'));
+    groups.forEach(function (g) {
+      var imgs = [].slice.call(g.querySelectorAll('img'));
+      imgs.forEach(function (img, i) {
+        img.classList.add('zoomable');
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+        var open = function () { lbOpen(imgs, i, img); };
+        img.addEventListener('click', open);
+        img.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+      });
+    });
+    function capOf(img) {
+      var fc = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+      return fc ? fc.textContent.trim() : img.alt;
+    }
+    function lbShow(i, anim) {
+      lbI = (i + lbSet.length) % lbSet.length;
+      var src = lbSet[lbI];
+      var put = function () {
+        lbImg.src = src.currentSrc || src.src; lbImg.alt = src.alt;
+        lbCap.textContent = capOf(src);
+        lbCnt.textContent = lbSet.length > 1 ? (lbI + 1) + ' / ' + lbSet.length : '';
+        lbImg.classList.remove('is-swap');
+      };
+      if (anim && !reduce) { lbImg.classList.add('is-swap'); setTimeout(put, 150); } else put();
+      lbPrev.hidden = lbNext.hidden = lbSet.length < 2;
+    }
+    function lbOpen(set, i, from) {
+      lbSet = set; lbBack = from;
+      lbShow(i, false);
+      lb.hidden = false;
+      body.classList.add('lb-open');
+      requestAnimationFrame(function () { lb.classList.add('is-open'); lbX.focus(); });
+    }
+    function lbClose() {
+      lb.classList.remove('is-open');
+      body.classList.remove('lb-open');
+      setTimeout(function () { lb.hidden = true; lbImg.removeAttribute('src'); }, reduce ? 0 : 220);
+      if (lbBack) lbBack.focus({ preventScroll: true });
+    }
+    lbX.addEventListener('click', lbClose);
+    lbPrev.addEventListener('click', function () { lbShow(lbI - 1, true); });
+    lbNext.addEventListener('click', function () { lbShow(lbI + 1, true); });
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lb-fig')) lbClose(); });
+    doc.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') lbClose();
+      else if (e.key === 'ArrowRight' && lbSet.length > 1) lbShow(lbI + 1, true);
+      else if (e.key === 'ArrowLeft' && lbSet.length > 1) lbShow(lbI - 1, true);
+      else if (e.key === 'Tab') {
+        var f = [lbX, lbPrev, lbNext].filter(function (b) { return !b.hidden; });
+        var at = f.indexOf(doc.activeElement);
+        e.preventDefault();
+        f[(at + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    });
+    var sx = null, sy = 0;
+    lbImg.addEventListener('pointerdown', function (e) { sx = e.clientX; sy = e.clientY; });
+    lbImg.addEventListener('pointerup', function (e) {
+      if (sx === null) return;
+      var dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) && lbSet.length > 1) lbShow(lbI + (dx < 0 ? 1 : -1), true);
+    });
+  }
+
+  /* ---------- UI: маска телефона +7 777 123 45 67 ---------- */
+  var tel = doc.getElementById('f-phone');
+  if (tel) {
+    tel.addEventListener('input', function () {
+      var atEnd = tel.selectionStart === tel.value.length;
+      var d = tel.value.replace(/\D/g, '');
+      if (!d) { tel.value = ''; tel.closest('.fld').classList.remove('is-ok'); return; }
+      if (d[0] === '8') d = '7' + d.slice(1);
+      if (d[0] !== '7') d = '7' + d;
+      d = d.slice(0, 11);
+      var out = '+7';
+      if (d.length > 1) out += ' ' + d.slice(1, 4);
+      if (d.length > 4) out += ' ' + d.slice(4, 7);
+      if (d.length > 7) out += ' ' + d.slice(7, 9);
+      if (d.length > 9) out += ' ' + d.slice(9, 11);
+      if (atEnd) tel.value = out;
+      tel.closest('.fld').classList.toggle('is-ok', d.length === 11);
+    });
   }
 
   /* ---------- старт ---------- */
