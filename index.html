@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wdth,wght@70,800&family=Onest:wght@400;500;600;700&display=swap">
 <link rel="preload" as="image" href="assets/hero-car.webp?v=20261106">
-<link rel="stylesheet" href="styles.css?v=20261106-4">
+<link rel="stylesheet" href="styles.css?v=20261107-1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -70,6 +70,31 @@
     {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Шумоизоляция автомобиля"}, "price": "250000", "priceCurrency": "KZT"}
   ]
 }
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-K9ZNHDZF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  window.AW_CONV = {
+    phone: 'AW-18561314476/cvj1CMih5rMdEKzd3JJF',
+    contact: 'AW-18561314476/ZHKUCOmd7bMdEKzd3JJF',
+    form: 'AW-18561314476/zmAiCKfh7rMdEKzd3JJF'
+  };
+  function gtag_report_conversion(url, sendTo) {
+    var callback = function () {
+      if (typeof(url) != 'undefined') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'conversion', {
+      'send_to': sendTo || window.AW_CONV.phone,
+      'value': 1.0,
+      'currency': 'USD',
+      'event_callback': callback
+    });
+    return false;
+  }
 </script>
   <script src="https://lead-bot.sultan-askarov-kz.workers.dev/t.js" data-site="nazaraudar" defer></script>
 </head>
@@ -645,6 +670,6 @@
   <button class="lb-arr lb-next" type="button" aria-label="Следующее фото"><svg width="22" height="22"><use href="#ic-arr"/></svg></button>
 </div>
 
-<script src="script.js?v=20261106-4" defer></script>
+<script src="script.js?v=20261107-1" defer></script>
 </body>
 </html>
